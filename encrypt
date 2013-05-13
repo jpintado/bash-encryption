@@ -1,5 +1,14 @@
 #!/bin/bash
 
+EXPECTED_ARGS=1
+E_BADARGS=65
+
+if [ $# -ne $EXPECTED_ARGS ] 
+then
+  echo "Usage: `basename $0` FILE"
+  exit $E_BADARGS
+fi
+
 dec_filename=`echo $1 | sed -e 's/\(\/\)*$//g'`
 tar_filename=`echo $dec_filename.tar`
 enc_filename=`echo $dec_filename.tar.enc`
