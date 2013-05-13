@@ -1,0 +1,17 @@
+#!/bin/bash
+
+enc_filename=$1
+dec_filename=`echo $enc_filename | sed 's/\./ /g' | awk '{print $1"."$2}'`
+final_filename=`echo $enc_filename | sed 's/\./ /g' | awk '{print $1}'`
+
+openssl aes-256-cbc -d -in $enc_filename -out $dec_filename
+tar xzf $dec_filename
+RESULT=$?
+
+rm $dec_filename
+
+if [ $RESULT -ne 0 ]; then
+    echo "Error encrypting";exit 1;
+fi
+rm -rf $enc_filename
+
