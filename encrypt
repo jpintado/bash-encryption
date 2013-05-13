@@ -21,8 +21,8 @@ rm $tar_filename
 
 if [ $RESULT -ne 0 ]
 then
-    echo "Error encrypting";
-    exit 1;
+    echo "Error encrypting"
+    exit 1
 fi
 
 rm -rf $dec_filename
