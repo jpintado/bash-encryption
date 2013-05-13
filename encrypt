@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dec_filename=`echo $1 | sed -e 's/\(\/\)*$//g'`
+tar_filename=`echo $dec_filename.tar`
+enc_filename=`echo $dec_filename.tar.enc`
+
+tar -czf $tar_filename $dec_filename
+openssl aes-256-cbc -salt -in $tar_filename -out $enc_filename
+
+RESULT=$?
+rm $tar_filename
+
+if [ $RESULT -ne 0 ]; then
+    echo "Error encrypting";exit 1;
+fi
+rm -rf $dec_filename
+
