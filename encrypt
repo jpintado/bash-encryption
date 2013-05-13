@@ -19,8 +19,11 @@ openssl aes-256-cbc -salt -in $tar_filename -out $enc_filename
 RESULT=$?
 rm $tar_filename
 
-if [ $RESULT -ne 0 ]; then
-    echo "Error encrypting";exit 1;
+if [ $RESULT -ne 0 ]
+then
+    echo "Error encrypting";
+    exit 1;
 fi
+
 rm -rf $dec_filename
 
