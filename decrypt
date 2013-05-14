@@ -13,8 +13,11 @@ enc_filename=$1
 dec_filename=`echo $enc_filename | sed 's/\./ /g' | awk '{print $1"."$2}'`
 final_filename=`echo $enc_filename | sed 's/\./ /g' | awk '{print $1}'`
 
+echo "Decrypting file..."
 openssl aes-256-cbc -d -in $enc_filename -out $dec_filename
+echo "File decrypted. Decompressing..."
 tar xzf $dec_filename
+echo "File decrypted."
 RESULT=$?
 
 rm $dec_filename

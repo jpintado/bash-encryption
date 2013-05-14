@@ -13,8 +13,11 @@ dec_filename=`echo $1 | sed -e 's/\(\/\)*$//g'`
 tar_filename=`echo $dec_filename.tar`
 enc_filename=`echo $dec_filename.tar.enc`
 
+echo "Compressing file..."
 tar -czf $tar_filename $dec_filename
+echo "File compressed. Encrypting..."
 openssl aes-256-cbc -salt -in $tar_filename -out $enc_filename
+echo "File encrypted."
 
 RESULT=$?
 rm $tar_filename
